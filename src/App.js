@@ -1,14 +1,6 @@
 import React from 'react';
 import './App.css';
 
-
- function random_rgba() {
-  var o = Math.round, r = Math.random, s = 255;
-  return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
-}
-
-
-
 class App extends React.Component {
 
   state = {
@@ -36,7 +28,7 @@ class App extends React.Component {
   }
 
   addText = () => {
-    this.setState({ 
+    this.setState({
       text: '',
       thangs: [this.state.text, ...this.state.thangs]
     })
@@ -47,9 +39,9 @@ class App extends React.Component {
       <div className={"App" + (this.state.darkMode ? " dark" : "")}>
         <button onClick={this.toggle}>Dark mode</button>
         <h3>{this.state.text}</h3>
-        <input 
-          name="text" 
-          value={this.state.text} 
+        <input
+          name="text"
+          value={this.state.text}
           onChange={(event) => this.handleChange(event)}/>
         <button onClick={this.addText}>Add!</button>
 
