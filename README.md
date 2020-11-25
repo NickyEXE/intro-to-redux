@@ -4,18 +4,18 @@ Intro to Redux
 ## SWBATs
 
 ### Message Passing
-- [ ] Explain the pattern / technique of message passing
-- [ ] Refactor a component's behavior to use message passing 
+- [x] Explain the pattern / technique of message passing
+- [x] Refactor a component's behavior to use message passing
 
 ### Redux
-- [ ] Install the redux library so it can be used in a project.
-- [ ] Create a `store` in redux with some default `state`.
-- [ ] Create a `reducer` to change `state` based on an `action.type`.
-- [ ] Use `dispatch` to send an `action` to the `store` to make changes to `state`.
-- [ ] Read `state` in the `store`.
+- [x] Install the redux library so it can be used in a project.
+- [x] Create a `store` in redux with some default `state`.
+- [x] Create a `reducer` to change `state` based on an `action.type`.
+- [x] Use `dispatch` to send an `action` to the `store` to make changes to `state`.
+- [x] Read `state` in the `store`.
 
 ### React Redux
-- [ ] Install the `react-redux` library so it can be used in a project.
+- [x] Install the `react-redux` library so it can be used in a project.
 - [ ] Make the `store` available to their application by using the `Provider` component.
 - [ ] Use `connect` to give components the ability to listen for changes to the `store`.
 - [ ] Use `dispatch` in a React component.
@@ -43,12 +43,12 @@ Redux **will** test your JavaScript knowledge to the **MAX**!!!
 ### Message Passing
 
 
-
 ### Questions from labs & reading
 
 
-### Parking Lot 
+### Parking Lot
 
+Dev Tools: ```window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()```
 
 
 
@@ -61,8 +61,8 @@ Message passing is built on the idea of centralization of program flow: all prog
 
 ### Vocabulary
 - [ ] Redux - state management (library) (best) for large programs
-- [ ] store - object that serves as the ultimate source of truth for the app. like a cloud. and has getState and dispatch methods 
-- [ ] reducer - case switch that returns the new version of state 
+- [ ] store - object that serves as the ultimate source of truth for the app. like a cloud. and has getState and dispatch methods
+- [ ] reducer - case switch that returns the new version of state
 - [ ] getState() - current version of the store. READ
 - [ ] dispatch() - a function that takes an arg of an action and calls the reducer (and updates our store)
 - [ ] action - object that has a key of type and maybe payload and determines the reducer behavior
@@ -120,7 +120,3 @@ Everytime `dispatch` is called, the `reducer` is called. The 1st argument is the
 
 ### Additional Resources
 - [Redux Thunk Walkthrough](https://alligator.io/redux/redux-thunk/)
-
-
-
-

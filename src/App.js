@@ -1,64 +1,109 @@
 import React from 'react';
 import './App.css';
+import { store } from './index'
+import { connect } from 'react-redux'
 
-class App extends React.Component {
+function App(props){
 
-  state = {
-    likes: 0,
-    text: '',
-    darkMode: false,
-    thangs: []
-  }
+  // state = {
+  //   likes: 0,
+  //   text: '',
+  //   darkMode: false,
+  //   thangs: []
+  // }
 
-  like = () => {
-    this.setState({ likes: this.state.likes + 1 })
-  }
+  // The TYPE of change I want to happen
+  // Any data I need to make this change happen - PAYLOAD
+  // action = {type: "CHANGE_USER_NAME", payload: {user_id: 6, username: "The Cheese"}}
+  // reducer = (action) => {
+  //   switch (action.type){
+  //     case "LIKE":
+  //       return ({ likes: this.state.likes + 1 });
+  //     case "DISLIKE":
+  //       return ({ likes: this.state.likes - 1 });
+  //     case "TOGGLE":
+  //       return ({ darkMode: !this.state.darkMode });
+  //     case "SUBMIT":
+  //       return ({
+  //         text: '',
+  //         thangs: [this.state.text, ...this.state.thangs]
+  //       })
+  //     case "FORM_CHANGE":
+  //       return ({ [action.payload.name]: action.payload.value })
+  //     default:
+  //       return {...this.state}
+  //   }
+  // }
 
-  dislike = () => {
-    this.setState({ likes: this.state.likes - 1 })
-  }
+  // dispatch = (action) => this.setState(this.reducer(action))
 
-  toggle = () => {
-    this.setState({ darkMode: !this.state.darkMode })
-  }
 
-  handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
+  // like = () => {
+  //   this.setState({ likes: this.state.likes + 1 })
+  // }
 
-  }
+  // dislike = () => {
+  //   this.setState({ likes: this.state.likes - 1 })
+  // }
 
-  addText = () => {
-    this.setState({
-      text: '',
-      thangs: [this.state.text, ...this.state.thangs]
-    })
-  }
+  // toggle = () => {
+  //   this.setState({ darkMode: !this.state.darkMode })
+  // }
 
-  render(){
+  // handleChange = (event) => {
+  //   this.setState({ [event.target.name]: event.target.value })
+  // }
+
+  // addText = () => {
+  //   this.setState({
+  //     text: '',
+  //     thangs: [this.state.text, ...this.state.thangs]
+  //   })
+  // }
+
     return (
-      <div className={"App" + (this.state.darkMode ? " dark" : "")}>
-        <button onClick={this.toggle}>Dark mode</button>
-        <h3>{this.state.text}</h3>
+      <div className={"App" + (props.darkMode ? " dark" : "")}>
+        <button onClick={props.toggle}>Dark mode</button>
+        <h3>{props.text}</h3>
         <input
           name="text"
-          value={this.state.text}
-          onChange={(event) => this.handleChange(event)}/>
-        <button onClick={this.addText}>Add!</button>
+          value={props.text}
+          onChange={props.handleChange}/>
+        <button onClick={props.submit}>Add!</button>
 
-        <h4>{this.state.likes} likes</h4>
-        <button onClick={this.dislike}>
+        <h4>{props.likes} likes</h4>
+        <button onClick={props.dislike}>
           Dislike <span role="img" aria-label="thumbs down">👎</span>
         </button>
-        <button onClick={this.like}>
+        <button onClick={props.like}>
           Like<span role="img" aria-label="thumbs up">👍</span>
         </button>
         {
-          this.state.thangs.map((thang, index) => <h1 key={index} >{thang}</h1>)
+          props.things.map((thang, index) => <h1 key={index} >{thang}</h1>)
         }
       </div>
     );
+}
+
+// use this to take the keys you want from our redux state, and put them in this component's props
+const mapStateToProps = (state) => {
+  let wellLiked = state.likes > 5
+  return {
+    wellLiked: wellLiked,
+    likes: state.likes,
+    text: state.text,
+    darkMode: state.darkMode,
+    things: state.thangs
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggle: () => dispatch({type: "TOGGLE"}),
+    like: () => dispatch({type: "LIKE"}),
+    dislike: () => dispatch({type: "DISLIKE"}),
+    submit: () => dispatch({type: "SUBMIT"}),
+    handleChange: (event) => dispatch({type: "FORM_CHANGE", payload: event.target})
   }
 }
 
-
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
